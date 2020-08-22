@@ -1,11 +1,15 @@
 {
   "name": "the-curator-webapp",
+  "author": "Lance W",
+  "repository": "",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "next": "9.5.2",
