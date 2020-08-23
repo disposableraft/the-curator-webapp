@@ -52,7 +52,7 @@ describe("AutoComplete", () => {
     expect(list).not.toBeEmptyDOMElement();
   });
 
-  it("'active-suggestion' className is present when a value is selected", async () => {
+  it("'active-suggestion' className is present when a value is entered", async () => {
     const { container, getByRole } = render(
       <AutoComplete allSuggestions={allSuggestions} />
     );
@@ -71,5 +71,55 @@ describe("AutoComplete", () => {
     const list = await findByTestId("autosuggestion-list");
     const itemsCount = list.childElementCount;
     expect(itemsCount).toBe(3);
+  });
+
+  test.todo("doesn't return suggestions until 3 chars are input");
+
+  it("ArrowDown increments the active suggestion", async () => {
+    const { container, getByRole, findByTestId } = render(
+      <AutoComplete allSuggestions={allSuggestions} />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
+    const ul = await findByTestId("autosuggestion-list");
+    expect(ul.childNodes[1]).toHaveClass("active-suggestion");
+  });
+
+  it("ArrowDown updates the active suggestion no further than the end of the list", async () => {
+    const { container, getByRole, findByTestId } = render(
+      <AutoComplete allSuggestions={allSuggestions} />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
+    fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
+    fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
+    const ul = await findByTestId("autosuggestion-list");
+    expect(ul.childNodes[2]).toHaveClass("active-suggestion");
+  });
+
+  it("ArrowUp decrements the active suggestion", async () => {
+    const { container, getByRole, findByTestId } = render(
+      <AutoComplete allSuggestions={allSuggestions} />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
+    fireEvent.keyDown(field, { key: "ArrowUp", code: "ArrowUp" });
+    const ul = await findByTestId("autosuggestion-list");
+    expect(ul.childNodes[0]).toHaveClass("active-suggestion");
+  });
+
+  it("ArrowUp doesn't decrement beyond the first item", async () => {
+    const { container, getByRole, findByTestId } = render(
+      <AutoComplete allSuggestions={allSuggestions} />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "ArrowUp", code: "ArrowUp" });
+    fireEvent.keyDown(field, { key: "ArrowUp", code: "ArrowUp" });
+    const ul = await findByTestId("autosuggestion-list");
+    expect(ul.childNodes[0]).toHaveClass("active-suggestion");
   });
 });

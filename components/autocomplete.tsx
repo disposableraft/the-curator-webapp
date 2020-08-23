@@ -1,5 +1,5 @@
 import TextInput from "./text-input";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 
 type AutoCompleteProps = {
   allSuggestions: string[];
@@ -36,6 +36,16 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
     setSuggestions(results);
   };
 
+  const handleOnKeyDown = (key: string): void => {
+    if (key === "ArrowDown" && selected < suggestions.length - 1) {
+      setSelected(selected + 1);
+    }
+
+    if (key === "ArrowUp" && selected !== 0) {
+      setSelected(selected - 1);
+    }
+  };
+
   return (
     <div>
       <form data-testid="autocomplete-artist">
@@ -43,6 +53,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
           autoFocus
           name="artistName"
           onChange={(e) => handleChange(e.target.value)}
+          onKeyDown={(e) => handleOnKeyDown(e.key)}
           type="text"
           value={name}
         />
@@ -52,7 +63,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
           {suggestions.map((suggestion) => {
             return (
               <li
-                key={suggestion.name.replace(/\s/, "")}
+                key={suggestion.id}
                 className={
                   selected === suggestion.id ? "active-suggestion" : undefined
                 }
