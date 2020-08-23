@@ -1,10 +1,5 @@
 import AutoComplete from "../../components/autocomplete";
-import {
-  screen,
-  render,
-  fireEvent,
-  findByTestId,
-} from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
 
 const allSuggestions = [
   "Denise Debuvier",
@@ -121,5 +116,27 @@ describe("AutoComplete", () => {
     fireEvent.keyDown(field, { key: "ArrowUp", code: "ArrowUp" });
     const ul = await findByTestId("autosuggestion-list");
     expect(ul.childNodes[0]).toHaveClass("active-suggestion");
+  });
+
+  it("submits a selection to the input on pressing Enter", async () => {
+    const { container, getByRole, findByTestId } = render(
+      <AutoComplete allSuggestions={allSuggestions} />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    const form = await findByTestId("autocomplete-artist");
+    expect(form).toHaveFormValues({ artistName: "Lee Krasner" });
+  });
+
+  it("after pressing Enter the selection list should not be present", async () => {
+    const { container, getByRole, queryByTestId } = render(
+      <AutoComplete allSuggestions={allSuggestions} />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    screen.debug(container);
+    expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
   });
 });

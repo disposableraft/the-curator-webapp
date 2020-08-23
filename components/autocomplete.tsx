@@ -44,6 +44,12 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
     if (key === "ArrowUp" && selected !== 0) {
       setSelected(selected - 1);
     }
+
+    if (key === "Enter") {
+      setName(suggestions[selected].name);
+      setSelected(0);
+      setSuggestions(Array());
+    }
   };
 
   return (
@@ -58,7 +64,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
           value={name}
         />
       </form>
-      {Boolean(name) && (
+      {Boolean(suggestions.length) && (
         <ul data-testid="autosuggestion-list">
           {suggestions.map((suggestion) => {
             return (
