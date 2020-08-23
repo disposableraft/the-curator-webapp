@@ -2,10 +2,10 @@ import TextInput from "./text-input";
 import { useState } from "react";
 
 type AutoCompleteProps = {
-  suggestions: string[];
+  allSuggestions: string[];
 };
 
-const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
+const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
   const [name, setName] = useState("");
   return (
     <div>
@@ -20,7 +20,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
       </form>
       {Boolean(name) && (
         <ul data-testid="autosuggestion-list">
-          {suggestions.map((suggestion) => {
+          {allSuggestions.map((suggestion) => {
             return (
               <li
                 key={suggestion.replace(/\s/, "")}
