@@ -16,7 +16,7 @@ const allSuggestions = [
 ];
 
 describe("AutoComplete", () => {
-  it("renders", () => {
+  it("renders without crashing", () => {
     render(<AutoComplete allSuggestions={allSuggestions} />);
   });
 
@@ -37,7 +37,7 @@ describe("AutoComplete", () => {
     expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
   });
 
-  it("a list of suggestions is present when a value is entered", async () => {
+  it("a list of suggestions is present when values are entered", async () => {
     const { container, getByRole, findByTestId } = render(
       <AutoComplete allSuggestions={allSuggestions} />
     );
@@ -68,7 +68,14 @@ describe("AutoComplete", () => {
     expect(itemsCount).toBe(3);
   });
 
-  test.todo("doesn't return suggestions until 3 chars are input");
+  it("doesn't return suggestions until >2 chars are input", () => {
+    const { container, getByRole, queryByTestId } = render(
+      <AutoComplete allSuggestions={allSuggestions} />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Le" } });
+    expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
+  });
 
   it("ArrowDown increments the active suggestion", async () => {
     const { container, getByRole, findByTestId } = render(
@@ -118,7 +125,7 @@ describe("AutoComplete", () => {
     expect(ul.childNodes[0]).toHaveClass("active-suggestion");
   });
 
-  it("submits a selection to the input on pressing Enter", async () => {
+  it("commits a selection to the input on pressing Enter", async () => {
     const { container, getByRole, findByTestId } = render(
       <AutoComplete allSuggestions={allSuggestions} />
     );
@@ -129,14 +136,13 @@ describe("AutoComplete", () => {
     expect(form).toHaveFormValues({ artistName: "Lee Krasner" });
   });
 
-  it("after pressing Enter the selection list should not be present", async () => {
+  it("after pressing Enter, the list of suggestions is not be present", async () => {
     const { container, getByRole, queryByTestId } = render(
       <AutoComplete allSuggestions={allSuggestions} />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
     fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
-    screen.debug(container);
     expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
   });
 });

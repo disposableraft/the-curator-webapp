@@ -32,8 +32,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
 
   const handleChange = (value: string): void => {
     setName(value);
-    const results = searchSuggestions(value);
-    setSuggestions(results);
+    if (value.length > 2) {
+      const results = searchSuggestions(value);
+      setSuggestions(results);
+    }
   };
 
   const handleOnKeyDown = (key: string): void => {
