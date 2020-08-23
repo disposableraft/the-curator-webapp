@@ -62,7 +62,7 @@ describe("AutoComplete", () => {
     expect(activeLi.length).toEqual(1);
   });
 
-  it("searches for values", async () => {
+  it("returns search suggestions when values are entered", async () => {
     const { container, getByRole, findByTestId } = render(
       <AutoComplete allSuggestions={allSuggestions} />
     );
@@ -70,7 +70,6 @@ describe("AutoComplete", () => {
     fireEvent.change(field, { target: { value: "Lee" } });
     const list = await findByTestId("autosuggestion-list");
     const itemsCount = list.childElementCount;
-    // TODO ideally, count should be 3 to match "Wiles Lee Coyote"
-    expect(itemsCount).toBe(2);
+    expect(itemsCount).toBe(3);
   });
 });
