@@ -201,8 +201,8 @@ describe("AutoComplete", () => {
     expect(onSubmitCallback).toHaveBeenCalled();
   });
 
-  it('input is cleared when "escape" is pressed', () => {
-    const { container, getByRole, queryByTestId } = render(
+  it('input is cleared when "escape" is pressed', async () => {
+    const { container, getByRole, queryByTestId, findByTestId } = render(
       <AutoComplete
         onSubmitCallback={() => {}}
         allSuggestions={allSuggestions}
@@ -212,5 +212,7 @@ describe("AutoComplete", () => {
     fireEvent.change(field, { target: { value: "Lee" } });
     fireEvent.keyDown(field, { key: "Escape", code: "Escape" });
     expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
+    const form = await findByTestId("autocomplete-artist");
+    expect(form).not.toHaveFormValues({ artistName: "Lee" });
   });
 });

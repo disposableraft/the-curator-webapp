@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from "react";
 
 type AutoCompleteProps = {
   allSuggestions: string[];
-  onSubmitCallback: () => void;
+  onSubmitCallback: (value: string) => void;
 };
 
 type SearchSuggestion = {
@@ -54,10 +54,11 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
       setName(suggestions[selected].name);
       setSelected(0);
       setSuggestions(Array());
-      onSubmitCallback();
+      onSubmitCallback(suggestions[selected].name);
     }
 
     if (key === "Escape") {
+      setName("");
       setSelected(0);
       setSuggestions(Array());
     }
