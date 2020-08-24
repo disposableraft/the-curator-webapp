@@ -1,8 +1,8 @@
-import TextInput from "./text-input";
 import { useState, ChangeEvent } from "react";
 
 type AutoCompleteProps = {
   allSuggestions: string[];
+  onSubmitCallback: () => void;
 };
 
 type SearchSuggestion = {
@@ -10,7 +10,10 @@ type SearchSuggestion = {
   name: string;
 };
 
-const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
+const AutoComplete: React.FC<AutoCompleteProps> = ({
+  allSuggestions,
+  onSubmitCallback,
+}) => {
   const [name, setName] = useState("");
   const [suggestions, setSuggestions] = useState(Array());
   const [selected, setSelected] = useState(0);
@@ -51,6 +54,12 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
       setName(suggestions[selected].name);
       setSelected(0);
       setSuggestions(Array());
+      onSubmitCallback();
+    }
+
+    if (key === "Escape") {
+      setSelected(0);
+      setSuggestions(Array());
     }
   };
 
@@ -58,6 +67,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ allSuggestions }) => {
     <div>
       <form data-testid="autocomplete-artist">
         <input
+          autoComplete="off"
           autoFocus
           name="artistName"
           onChange={(e) => handleChange(e.target.value)}

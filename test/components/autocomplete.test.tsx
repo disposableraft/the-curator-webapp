@@ -17,12 +17,20 @@ const allSuggestions = [
 
 describe("AutoComplete", () => {
   it("renders without crashing", () => {
-    render(<AutoComplete allSuggestions={allSuggestions} />);
+    render(
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
+    );
   });
 
   it("inputs key strokes", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Helen" } });
@@ -32,14 +40,20 @@ describe("AutoComplete", () => {
 
   it("a list of suggestions is not present initially", () => {
     const { container, queryByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
   });
 
   it("a list of suggestions is present when values are entered", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Helen" } });
@@ -49,7 +63,10 @@ describe("AutoComplete", () => {
 
   it("'active-suggestion' className is present when a value is entered", async () => {
     const { container, getByRole } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Helen Frankenthaler" } });
@@ -59,7 +76,10 @@ describe("AutoComplete", () => {
 
   it("returns search suggestions when values are entered", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
@@ -70,7 +90,10 @@ describe("AutoComplete", () => {
 
   it("doesn't return suggestions until >2 chars are input", () => {
     const { container, getByRole, queryByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Le" } });
@@ -79,7 +102,10 @@ describe("AutoComplete", () => {
 
   it("ArrowDown increments the active suggestion", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
@@ -90,7 +116,10 @@ describe("AutoComplete", () => {
 
   it("ArrowDown updates the active suggestion no further than the end of the list", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
@@ -103,7 +132,10 @@ describe("AutoComplete", () => {
 
   it("ArrowUp decrements the active suggestion", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
@@ -115,7 +147,10 @@ describe("AutoComplete", () => {
 
   it("ArrowUp doesn't decrement beyond the first item", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
@@ -127,7 +162,10 @@ describe("AutoComplete", () => {
 
   it("commits a selection to the input on pressing Enter", async () => {
     const { container, getByRole, findByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
@@ -138,11 +176,41 @@ describe("AutoComplete", () => {
 
   it("after pressing Enter, the list of suggestions is not be present", async () => {
     const { container, getByRole, queryByTestId } = render(
-      <AutoComplete allSuggestions={allSuggestions} />
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Lee" } });
     fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
+  });
+
+  it("the onSubmit callback fires when Enter is pressed", () => {
+    const onSubmitCallback = jest.fn();
+    const { container, getByRole } = render(
+      <AutoComplete
+        onSubmitCallback={onSubmitCallback}
+        allSuggestions={allSuggestions}
+      />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    expect(onSubmitCallback).toHaveBeenCalled();
+  });
+
+  it('input is cleared when "escape" is pressed', () => {
+    const { container, getByRole, queryByTestId } = render(
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Lee" } });
+    fireEvent.keyDown(field, { key: "Escape", code: "Escape" });
     expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
   });
 });
