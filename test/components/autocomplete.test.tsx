@@ -61,7 +61,7 @@ describe("AutoComplete", () => {
     expect(list).not.toBeEmptyDOMElement();
   });
 
-  it("'active-suggestion' className is present when a value is entered", async () => {
+  it("'activeSuggestion' className is present when a value is entered", async () => {
     const { container, getByRole } = render(
       <AutoComplete
         onSubmitCallback={() => {}}
@@ -70,7 +70,7 @@ describe("AutoComplete", () => {
     );
     let field = getByRole("textbox");
     fireEvent.change(field, { target: { value: "Helen Frankenthaler" } });
-    const activeLi = container.getElementsByClassName("active-suggestion");
+    const activeLi = container.getElementsByClassName("activeSuggestion");
     expect(activeLi.length).toEqual(1);
   });
 
@@ -125,7 +125,7 @@ describe("AutoComplete", () => {
     fireEvent.change(field, { target: { value: "Lee" } });
     fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
     const ul = await findByTestId("autosuggestion-list");
-    expect(ul.childNodes[1]).toHaveClass("active-suggestion");
+    expect(ul.childNodes[1]).toHaveClass("activeSuggestion");
   });
 
   it("ArrowDown updates the active suggestion no further than the end of the list", async () => {
@@ -141,7 +141,7 @@ describe("AutoComplete", () => {
     fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
     fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
     const ul = await findByTestId("autosuggestion-list");
-    expect(ul.childNodes[2]).toHaveClass("active-suggestion");
+    expect(ul.childNodes[2]).toHaveClass("activeSuggestion");
   });
 
   it("ArrowUp decrements the active suggestion", async () => {
@@ -156,7 +156,7 @@ describe("AutoComplete", () => {
     fireEvent.keyDown(field, { key: "ArrowDown", code: "ArrowDown" });
     fireEvent.keyDown(field, { key: "ArrowUp", code: "ArrowUp" });
     const ul = await findByTestId("autosuggestion-list");
-    expect(ul.childNodes[0]).toHaveClass("active-suggestion");
+    expect(ul.childNodes[0]).toHaveClass("activeSuggestion");
   });
 
   it("ArrowUp doesn't decrement beyond the first item", async () => {
@@ -171,7 +171,7 @@ describe("AutoComplete", () => {
     fireEvent.keyDown(field, { key: "ArrowUp", code: "ArrowUp" });
     fireEvent.keyDown(field, { key: "ArrowUp", code: "ArrowUp" });
     const ul = await findByTestId("autosuggestion-list");
-    expect(ul.childNodes[0]).toHaveClass("active-suggestion");
+    expect(ul.childNodes[0]).toHaveClass("activeSuggestion");
   });
 
   it("commits a selection to the input on pressing Enter", async () => {
@@ -215,6 +215,21 @@ describe("AutoComplete", () => {
     expect(onSubmitCallback).toHaveBeenCalled();
   });
 
+  it("the onSubmit callback fires when clicking on a name", async () => {
+    const onSubmitCallback = jest.fn();
+    const { container, getByRole, getAllByRole } = render(
+      <AutoComplete
+        onSubmitCallback={onSubmitCallback}
+        allSuggestions={allSuggestions}
+      />
+    );
+    let input = getByRole("textbox");
+    fireEvent.change(input, { target: { value: "Lee" } });
+    let option = getAllByRole("option");
+    fireEvent.click(option[1]);
+    expect(onSubmitCallback).toHaveBeenCalled();
+  });
+
   it('input is cleared when "escape" is pressed', async () => {
     const { container, getByRole, queryByTestId, findByTestId } = render(
       <AutoComplete
@@ -229,4 +244,6 @@ describe("AutoComplete", () => {
     const form = await findByTestId("autocomplete-artist");
     expect(form).not.toHaveFormValues({ artistName: "Lee" });
   });
+
+  test.todo("typing new input resets the active selection");
 });

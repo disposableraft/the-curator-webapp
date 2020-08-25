@@ -1,0 +1,27 @@
+.textbox {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.suggestions {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: calc(300px + 1rem);
+}
+
+.activeSuggestion,
+.suggestion:hover {
+  background-color: black;
+  color: white;
+}
+
+.suggestion:hover {
+  cursor: pointer;
+}
