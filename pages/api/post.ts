@@ -1,10 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import util from "util";
+import { exec } from "child_process";
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  // console.log("api/post", res);
-  console.log(req.body);
-  const result = { name: req.body.name, artists: ["anm1", "name", "name2"] };
-  res.json(result);
+const execPromise = util.promisify(exec);
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { stdout, stderr } = await execPromise("python python/resolver.py");
+  res.json(stdout);
 };
 
 export default handler;

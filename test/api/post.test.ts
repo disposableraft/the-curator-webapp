@@ -16,7 +16,7 @@ describe("api/post", () => {
     server.close();
   });
 
-  it("responds with expected JSON", async () => {
+  it("responds with expected JSON from server", async () => {
     const requestHandler = (req, res) => {
       return apiResolver(req, res, undefined, handler, "", undefined);
     };
@@ -28,10 +28,9 @@ describe("api/post", () => {
       body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" },
     });
-    const expected = {
-      name: "pablo",
-      artists: ["anm1", "name", "name2"],
-    };
+    const expected = JSON.parse(
+      '{"name": "Helen", "artists": ["foo1", "foo2", "foo3"]}'
+    );
     expect(await response.json()).toMatchObject(expected);
     server.close();
   });
