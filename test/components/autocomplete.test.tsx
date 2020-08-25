@@ -88,6 +88,20 @@ describe("AutoComplete", () => {
     expect(itemsCount).toBe(3);
   });
 
+  it("searches for suggestions regardless of letter case", async () => {
+    const { container, getByRole, findByTestId } = render(
+      <AutoComplete
+        onSubmitCallback={() => {}}
+        allSuggestions={allSuggestions}
+      />
+    );
+    let field = getByRole("textbox");
+    fireEvent.change(field, { target: { value: "lee" } });
+    const list = await findByTestId("autosuggestion-list");
+    const itemsCount = list.childElementCount;
+    expect(itemsCount).toBe(3);
+  });
+
   it("doesn't return suggestions until >2 chars are input", () => {
     const { container, getByRole, queryByTestId } = render(
       <AutoComplete

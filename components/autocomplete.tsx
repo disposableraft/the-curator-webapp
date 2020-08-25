@@ -20,7 +20,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 
   const searchSuggestions = (text: string): SearchSuggestion[] => {
     const results = allSuggestions.filter((term) => {
-      return term.search(text) >= 0;
+      return term.toLowerCase().search(text.toLowerCase()) >= 0;
     });
 
     const suggestions = results.map((result, index) => {
