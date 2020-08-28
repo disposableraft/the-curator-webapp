@@ -2,15 +2,27 @@ import argparse
 import json
 from gensim.models.word2vec import Word2Vec 
 
-def main(name):
-  model = Word2Vec.load("./word2vec.pickle")
-  similars = model.wv.most_similar(name)
+def name_to_token(name):
+  with open("../lib/names_to_tokens.json", 'r') as f:
+    mapping = json.loads(f.read())
+  return mapping[name]
 
-  tokens = [token for (token, score) in similars]
+def tokens_to_names(tokens):
+  with open("../lib/tokens_to_names.json", 'r') as f:
+    mapping = json.loads(f.read())
+  return [mapping[t] for t in tokens]
+
+def main(name):
+  token = name_to_token(name)
+  model = Word2Vec.load("./word2vec.pickle")
+  similars = model.wv.most_similar(token)
+  similar_tokens = [token for (token, score) in similars]
+  
+  names = [name for name in tokens_to_names(similar_tokens)]
 
   result = {
     "name": name,
-    "artists": tokens
+    "artists": names
   }
   return json.dumps(result)
 
