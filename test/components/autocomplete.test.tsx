@@ -16,28 +16,6 @@ const allSuggestions = [
 ];
 
 describe("AutoComplete", () => {
-  it("renders without crashing", () => {
-    render(
-      <AutoComplete
-        onSubmitCallback={() => {}}
-        allSuggestions={allSuggestions}
-      />
-    );
-  });
-
-  it("inputs key strokes", async () => {
-    const { container, getByRole, findByTestId } = render(
-      <AutoComplete
-        onSubmitCallback={() => {}}
-        allSuggestions={allSuggestions}
-      />
-    );
-    let field = getByRole("textbox");
-    fireEvent.change(field, { target: { value: "Helen" } });
-    const form = await findByTestId("autocomplete-artist");
-    expect(form).toHaveFormValues({ artistName: "Helen" });
-  });
-
   it("a list of suggestions is not present initially", () => {
     const { container, queryByTestId } = render(
       <AutoComplete
@@ -46,19 +24,6 @@ describe("AutoComplete", () => {
       />
     );
     expect(queryByTestId("autosuggestion-list")).not.toBeInTheDocument();
-  });
-
-  it("a list of suggestions is present when values are entered", async () => {
-    const { container, getByRole, findByTestId } = render(
-      <AutoComplete
-        onSubmitCallback={() => {}}
-        allSuggestions={allSuggestions}
-      />
-    );
-    let field = getByRole("textbox");
-    fireEvent.change(field, { target: { value: "Helen" } });
-    const list = await findByTestId("autosuggestion-list");
-    expect(list).not.toBeEmptyDOMElement();
   });
 
   it("'activeSuggestion' className is present when a value is entered", async () => {
@@ -96,7 +61,7 @@ describe("AutoComplete", () => {
       />
     );
     let field = getByRole("textbox");
-    fireEvent.change(field, { target: { value: "lee" } });
+    fireEvent.change(field, { target: { value: "leE" } });
     const list = await findByTestId("autosuggestion-list");
     const itemsCount = list.childElementCount;
     expect(itemsCount).toBe(3);
@@ -246,4 +211,8 @@ describe("AutoComplete", () => {
   });
 
   test.todo("typing new input resets the active selection");
+
+  test.todo("the input and suggestions are cleared onSubmit");
+
+  test.todo("the suggestions are not rendered when input loses focus");
 });
