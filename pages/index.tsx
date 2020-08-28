@@ -22,34 +22,43 @@ const Home: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>The Curator</title>
+        <title>The Curator Web Interface</title>
       </Head>
-      <div className={style.main}>
-        <AutoComplete
-          className={style.autocomplete}
-          onSubmitCallback={(value) => onSubmit(value)}
-          allSuggestions={names}
-        />
-        <div className={style.description}>
-          Enter an artist or select one by{" "}
-          <a
-            href="#"
-            onClick={(e) => {
-              alert("Selecting random artist");
-            }}
-          >
-            random
-          </a>
+      <div className={style.container}>
+        <div className={style.main}>
+          <AutoComplete
+            className={style.autocomplete}
+            onSubmitCallback={(value) => onSubmit(value)}
+            allSuggestions={names}
+          />
+          <div className={style.description}>
+            Enter an artist or select one by{" "}
+            <a
+              href="#"
+              onClick={(e) => {
+                alert("Selecting random artist");
+              }}
+            >
+              random
+            </a>
+          </div>
+          <div className={style.grid}>
+            {exhibition.map((artist) => {
+              return (
+                <div
+                  data-testid="test-card"
+                  className={style.card}
+                  key={artist.replace(/\s/g, "")}
+                >
+                  <h3>{artist}</h3>
+                  <p>
+                    <img width="100%" height="120px" />
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <section>
-          {exhibition.map((artist) => {
-            return (
-              <div data-testid="test-card" key={artist.replace(/\s/g, "")}>
-                {artist}
-              </div>
-            );
-          })}
-        </section>
       </div>
     </Layout>
   );
