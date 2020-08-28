@@ -17,7 +17,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   onSubmitCallback,
   ...props
 }) => {
-  const [name, setName] = useState<string>();
+  const [name, setName] = useState<string>("");
   const [suggestions, setSuggestions] = useState<SearchSuggestion[]>(
     Array<SearchSuggestion>()
   );
