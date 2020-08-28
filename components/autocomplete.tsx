@@ -1,24 +1,26 @@
 import { useState } from "react";
 import style from "../styles/AutoComplete.module.css";
 
-type AutoCompleteProps = {
+interface AutoCompleteProps {
   allSuggestions: string[];
   onSubmitCallback: (value: string | null) => void;
   className?: string;
-};
+}
 
-type SearchSuggestion = {
+interface SearchSuggestion {
   id: number;
   name: string;
-};
+}
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({
   allSuggestions,
   onSubmitCallback,
   ...props
 }) => {
-  const [name, setName] = useState("");
-  const [suggestions, setSuggestions] = useState(Array());
+  const [name, setName] = useState<string>();
+  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>(
+    Array<SearchSuggestion>()
+  );
   const [selected, setSelected] = useState(0);
 
   const searchSuggestions = (text: string): SearchSuggestion[] => {
@@ -69,7 +71,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 
   return (
     <div>
-      <form data-testid="autocomplete-artist">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        data-testid="autocomplete-artist"
+      >
         <input
           className={style.textbox}
           autoComplete="off"
@@ -90,7 +95,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
               return (
                 <li
                   role="option"
-                  onClick={(e) => onSubmitCallback(e.currentTarget.textContent)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSubmitCallback(e.currentTarget.textContent);
+                  }}
                   aria-selected={Boolean(selected === suggestion.id)}
                   key={suggestion.id}
                   className={
