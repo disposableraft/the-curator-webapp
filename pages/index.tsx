@@ -42,7 +42,7 @@ const Home: React.FC = () => {
               random
             </a>
           </div>
-          <div className={style.grid}>
+          <div data-testid="test-grid" className={style.grid}>
             {exhibition.map((artist) => {
               return (
                 <div
