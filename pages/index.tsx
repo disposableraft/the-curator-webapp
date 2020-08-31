@@ -3,6 +3,7 @@ import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 import Layout from "../components/layout";
 import AutoComplete from "../components/autocomplete";
+import Card from "../components/card";
 import style from "../styles/Home.module.css";
 import names from "../lib/names.json";
 
@@ -56,18 +57,7 @@ const Home: React.FC = () => {
           <div data-testid="test-grid" className={style.grid}>
             {Boolean(exhibition.length) &&
               exhibition.map((artist) => {
-                return (
-                  <div
-                    data-testid="test-card"
-                    className={style.card}
-                    key={artist.replace(/\s/g, "")}
-                  >
-                    <h3>{artist}</h3>
-                    <p>
-                      <img width="100%" height="120px" />
-                    </p>
-                  </div>
-                );
+                return <Card key={artist.replace(/\s/g, "")} artist={artist} />;
               })}
           </div>
         </div>
