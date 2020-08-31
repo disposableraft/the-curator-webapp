@@ -4,7 +4,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 
 const payload = {
-  name: "name onyc",
+  name: "Pablo",
   artists: ["a", "b", "c", "d", "e"],
 };
 
@@ -41,15 +41,31 @@ describe("Home with form input", () => {
     await waitFor(() => {
       screen.getAllByTestId("test-card");
     });
-    const cards = await screen.getAllByTestId("test-card");
+    const cards = await screen.findAllByTestId("test-card");
     expect(cards).toHaveLength(5);
   });
 
-  it("renders the name that the user selected", () => {});
+  it("renders the name that the user selected", async () => {
+    render(<Home />);
+    const field = screen.getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Pablo" } });
+    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    await waitFor(() => {
+      screen.getByText("Pablo");
+    });
+    const heading = await screen.findByText("Pablo");
+    expect(heading).toHaveClass("selectedArtist");
+  });
 
-  it("does not display the autocomplete", () => {
-    const { container, getByTestId } = render(<Home />);
-    const suggestions = getByTestId("autocomplete-artist");
-    expect(suggestions).not.toBeInTheDocument();
+  it("does not display the autocomplete", async () => {
+    render(<Home />);
+    const field = screen.getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Pablo" } });
+    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    await waitFor(() => {
+      screen.getByText("Pablo");
+    });
+    const autocomplete = screen.queryByTestId("autocomplete-artist");
+    expect(autocomplete).not.toBeInTheDocument();
   });
 });
