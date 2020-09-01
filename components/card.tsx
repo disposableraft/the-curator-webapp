@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
   const [data, setData] = useState<SearchResult>();
 
   const fetchData = async (term: string): Promise<SearchResult> => {
-    const url = new URL("http://localhost:3000/api/artist");
+    const url = new URL("http://localhost:3000/api/search");
     url.searchParams.append("name", artist);
     const response = await fetch(url.href);
     const data = await response.json();

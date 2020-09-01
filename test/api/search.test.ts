@@ -1,7 +1,7 @@
 import http from "http";
 import { IncomingMessage, ServerResponse } from "http";
 import { apiResolver } from "next/dist/next-server/server/api-utils";
-import handler from "../../pages/api/artist";
+import handler from "../../pages/api/search";
 import listen from "test-listen";
 import googleImageData from "./post-mock-data.json";
 import fetchMock from "jest-fetch-mock";
