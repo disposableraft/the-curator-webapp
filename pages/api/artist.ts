@@ -1,33 +1,44 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import getConfig from "next/config";
 import fetch from "isomorphic-unfetch";
+import { getCachedResult, setCachedResult } from "../../lib/cached-results";
 
 type Params = {
   [propName: string]: string;
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { serverRuntimeConfig } = getConfig();
-  console.debug(serverRuntimeConfig);
-  const url = new URL(serverRuntimeConfig.googleSearchUrl as string);
-  const name = req.query.name as string;
+const search = async (term: string, serverRuntimeConfig: Params) => {
+  const url = new URL(serverRuntimeConfig.googleSearchUrl);
   const params: Params = {
-    q: name,
+    q: term,
     searchType: "image",
-    key: serverRuntimeConfig.googleSearchKey as string,
-    cx: serverRuntimeConfig.googleSearchCx as string,
+    key: serverRuntimeConfig.googleSearchKey,
+    cx: serverRuntimeConfig.googleSearchCx,
   };
   Object.keys(params).forEach((key) =>
     url.searchParams.append(key, params[key])
   );
   const response = await fetch(url.href);
-  const data = await response.json();
-  res.json({
-    title: data.items[0].title,
-    link: data.items[0].link,
-    thumbnailLink: data.items[0].image.thumbnailLink,
-    thumbnailHeight: data.items[0].image.thumbnailHeight,
-    thumbnailWidth: data.items[0].image.thumbnailWidth,
+  return response.json();
+};
+
+const handler = (req: NextApiRequest, res: NextApiResponse) => {
+  const { serverRuntimeConfig } = getConfig();
+  const name = req.query.name as string;
+
+  getCachedResult(name, (err, cache) => {
+    if (err) {
+      search(name, serverRuntimeConfig)
+        .then((data) => {
+          setCachedResult(name, data);
+          res.json(data.items[0]);
+        })
+        .catch((err) => {
+          console.debug(err);
+        });
+    } else {
+      res.json(JSON.parse(cache).items[0]);
+    }
   });
 };
 
