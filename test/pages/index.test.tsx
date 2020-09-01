@@ -16,13 +16,13 @@ const server = setupServer(
 
 describe("Home without form input", () => {
   it("displays the autocomplete", () => {
-    const { container, getByTestId } = render(<Home />);
+    const { getByTestId } = render(<Home />);
     const suggestions = getByTestId("autocomplete-artist");
     expect(suggestions).toBeInTheDocument();
   });
 
   it("doesn't display the grid", () => {
-    const { container, queryAllByTestId } = render(<Home />);
+    const { queryAllByTestId } = render(<Home />);
     const cards = queryAllByTestId("test-card");
     expect(cards).toHaveLength(0);
   });
