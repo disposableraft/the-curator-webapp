@@ -25,9 +25,13 @@ const Home: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>The Curator Web Interface</title>
+        <title>Exhibition AutoComplete</title>
       </Head>
       <div className={style.container}>
+        <h2 className={style.selectedArtist}>
+          Exhibition <span className={style.highlight}>Autocomplete</span>{" "}
+          {Boolean(subject) && `: ${subject}`}
+        </h2>
         {exhibition.length > 0 || (
           <div className={style.main}>
             <AutoComplete
@@ -35,22 +39,7 @@ const Home: React.FC = () => {
               onSubmitCallback={(value) => onSubmit(value)}
               allSuggestions={names}
             />
-            <div className={style.description}>
-              Enter an artist or select one by{" "}
-              <a
-                href="#"
-                onClick={(e) => {
-                  alert("Selecting random artist");
-                }}
-              >
-                random
-              </a>
-            </div>
           </div>
-        )}
-
-        {Boolean(subject.length) && (
-          <h2 className={style.selectedArtist}>{subject}</h2>
         )}
 
         <div className={style.main}>
