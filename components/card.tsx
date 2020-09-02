@@ -18,6 +18,7 @@ interface SearchResult {
 
 const Card: React.FC<CardProps> = ({ artist, ...props }) => {
   const [data, setData] = useState<SearchResult>();
+  const id = artist.replace(/\s+/g, "");
 
   const fetchData = async (term: string): Promise<SearchResult> => {
     const url = new URL("http://localhost:3000/api/search");
@@ -38,16 +39,14 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
   }, []);
 
   return (
-    <div data-testid="test-card" className={style.card}>
-      <p>
-        <img
-          src={data && data.image.thumbnailLink}
-          width="100%"
-          height="120px"
-          alt={data && data.title}
-        />
-      </p>
-      <h3>{artist}</h3>
+    <div
+      data-testid="test-card"
+      className={style.card}
+      style={{
+        backgroundImage: `url(${data?.link})`,
+      }}
+    >
+      <h1 className={style.text}>{artist}</h1>
     </div>
   );
 };
