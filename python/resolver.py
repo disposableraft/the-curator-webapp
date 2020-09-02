@@ -15,7 +15,7 @@ def tokens_to_names(tokens):
 def main(name):
   token = name_to_token(name)
   model = Word2Vec.load("python/word2vec.pickle")
-  similars = model.wv.most_similar(token)
+  similars = model.wv.most_similar(token, topn=12)
   similar_tokens = [token for (token, score) in similars]
   
   names = [name for name in tokens_to_names(similar_tokens)]
