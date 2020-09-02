@@ -46,7 +46,7 @@ describe("api/post", () => {
     });
     const results = await response.json();
     expect(results["name"]).toBe("Pablo Picasso");
-    expect(results["artists"].length).toEqual(10);
+    expect(results["artists"].length).toEqual(12);
   });
 
   it("sanitizes user input and responds with status ok and an error object", async () => {
