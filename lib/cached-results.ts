@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 const getHandle = (searchTerm: string): string => {
-  const pwd = process.env.PWD || "";
+  const pwd = process.env.PWD as string;
   const cacheDir = path.resolve(pwd, "search-results-cache");
   const filename = `${searchTerm.replace(/\s/g, "")}.json`;
   return path.join(cacheDir, filename);
