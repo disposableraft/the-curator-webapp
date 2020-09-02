@@ -3,17 +3,14 @@ import Card from "../../components/card";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
-const payload = {
+const searchResult = {
   title: "A beautiful title on a sunny day, 1900",
   link: "http://example.com/link",
-  thumbnailLink: "http://example.com/thumnail-link",
-  thumbnailHeight: "100",
-  thumbnailWidth: "100",
 };
 
 const server = setupServer(
-  rest.get("http://localhost:3000/api/artist", (req, res, ctx) => {
-    return res(ctx.json(payload));
+  rest.get("http://localhost:3000/api/search", (req, res, ctx) => {
+    return res(ctx.json(searchResult));
   })
 );
 
@@ -24,11 +21,10 @@ describe("Card", () => {
 
   it("renders a card", async () => {
     render(<Card artist="foo name" />);
-    const card = screen.getByTestId("test-card");
     await waitFor(() => {
-      screen.getByAltText(payload.title);
+      screen.findByTestId("test-card");
     });
-    const heading = screen.getByRole("heading");
-    expect(heading).toHaveTextContent("foo name");
+    const card = await screen.findByTestId("test-card");
+    expect(card).toHaveTextContent("foo name");
   });
 });
