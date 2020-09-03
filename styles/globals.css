@@ -28,6 +28,12 @@ button {
 }
 
 a {
-  color: inherit;
+  color: blue;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: tomato;
 }

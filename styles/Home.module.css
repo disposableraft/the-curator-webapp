@@ -12,7 +12,7 @@
 
 .resetButton:hover,
 .helpButton:hover {
-  background-color: lightskyblue;
+  background-color: tomato;
   color: white;
 }
 
@@ -41,6 +41,12 @@
 .dialog p {
   background-color: white;
   padding: 0 0.125rem;
+}
+
+.autocompleteWrapper {
+  margin-top: 10rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .grid {

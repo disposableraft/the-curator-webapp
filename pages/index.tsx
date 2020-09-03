@@ -52,7 +52,7 @@ const Home: React.FC = () => {
               name="reset"
               title="Reset"
             >
-              X
+              ↺
             </button>
             <button
               onClick={() => toggleModal(!isModalVisible)}
@@ -65,9 +65,9 @@ const Home: React.FC = () => {
           </div>
         )}
         {collection.length > 0 || (
-          <main>
+          <main className={style.autocompleteWrapper}>
             <AutoComplete
-              className={style.autocomplete}
+              placeholder="Artist name"
               onSubmitCallback={(value) => onSubmit(value)}
               allSuggestions={names}
             />

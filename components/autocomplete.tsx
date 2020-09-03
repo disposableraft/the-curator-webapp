@@ -4,7 +4,7 @@ import style from "../styles/AutoComplete.module.css";
 interface AutoCompleteProps {
   allSuggestions: string[];
   onSubmitCallback: (value: string | null) => void;
-  className?: string;
+  placeholder: string;
 }
 
 interface SearchSuggestion {
@@ -15,6 +15,7 @@ interface SearchSuggestion {
 const AutoComplete: React.FC<AutoCompleteProps> = ({
   allSuggestions,
   onSubmitCallback,
+  placeholder,
   ...props
 }) => {
   const [name, setName] = useState<string>("");
@@ -70,13 +71,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   };
 
   return (
-    <div>
+    <div className={style.autocomplete}>
       <form
         onSubmit={(e) => e.preventDefault()}
         data-testid="autocomplete-artist"
       >
         <input
           className={style.textbox}
+          placeholder={placeholder}
           autoComplete="off"
           autoFocus
           name="artistName"

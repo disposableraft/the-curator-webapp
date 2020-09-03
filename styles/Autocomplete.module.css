@@ -1,8 +1,12 @@
+.autocomplete {
+  width: 100%;
+  grid-column-start: 2;
+}
+
 .textbox {
   border: 1px solid #999;
-  padding: 0.5rem;
+  padding: 0.85rem;
   width: 100%;
-  max-width: 500px;
 }
 
 .suggestions {
@@ -10,10 +14,17 @@
   border-top-width: 0;
   list-style: none;
   margin-top: 0;
-  max-height: 143px;
+  max-height: 33vh;
   overflow-y: auto;
   padding-left: 0;
-  width: calc(300px + 1rem);
+  width: 100%;
+  background-color: white;
+}
+
+.suggestion,
+.activeSuggestion,
+.suggestion:hover {
+  padding: 0.85rem;
 }
 
 .activeSuggestion,
