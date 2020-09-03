@@ -12,14 +12,21 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
   const id = artist.replace(/\s+/g, "");
 
   useEffect(() => {
+    let isMounted = true;
     fetchImages(artist)
       .then((data) => {
-        setData(data);
+        if (isMounted) {
+          setData(data);
+        }
       })
       .catch((err) => {
-        console.error(err);
-        setError(err);
+        if (isMounted) {
+          setError(err);
+        }
       });
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
