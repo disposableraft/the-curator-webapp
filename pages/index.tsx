@@ -8,7 +8,7 @@ import style from "../styles/Home.module.css";
 import names from "../lib/names.json";
 
 const Home: React.FC = () => {
-  const [exhibition, setExhibition] = useState<string[]>(Array());
+  const [collection, setCollection] = useState<string[]>(Array());
   const [subject, setSubject] = useState<string>("");
 
   const onSubmit = async (value: string | null) => {
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
-    setExhibition(data.artists);
+    setCollection(data.artists);
     setSubject(data.name);
   };
 
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
           Exhibition <span className={style.highlight}>Autocomplete</span>{" "}
           {Boolean(subject) && `: ${subject}`}
         </header>
-        {exhibition.length > 0 || (
+        {collection.length > 0 || (
           <main className={style.main}>
             <AutoComplete
               className={style.autocomplete}
@@ -42,10 +42,10 @@ const Home: React.FC = () => {
           </main>
         )}
 
-        {exhibition.length === 0 ? null : (
+        {collection.length === 0 || (
           <main className={style.main}>
             <div data-testid="test-grid" className={style.grid}>
-              {exhibition.map((artist) => {
+              {collection.map((artist) => {
                 return <Card key={artist.replace(/\s/g, "")} artist={artist} />;
               })}
             </div>
