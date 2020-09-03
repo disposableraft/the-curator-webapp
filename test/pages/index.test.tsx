@@ -23,7 +23,11 @@ describe("Home without form input", () => {
     expect(cards).toHaveLength(0);
   });
 
-  test.todo("a reset button is not displayed");
+  it("a reset button is not displayed", () => {
+    render(<Home />);
+    const reset = screen.queryByRole("button", { name: /x/i });
+    expect(reset).not.toBeInTheDocument();
+  });
 });
 
 describe("Home with form input", () => {
@@ -70,5 +74,15 @@ describe("Home with form input", () => {
     );
   });
 
-  test.todo("a reset button is displayed");
+  it("a reset button is displayed", async () => {
+    render(<Home />);
+    const field = screen.getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Pablo" } });
+    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    await waitFor(() => {
+      screen.getAllByTestId("test-card");
+    });
+    const reset = await screen.findByRole("button", { name: /x/i });
+    expect(reset).toBeInTheDocument();
+  });
 });

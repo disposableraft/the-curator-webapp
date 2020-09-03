@@ -23,6 +23,11 @@ const Home: React.FC = () => {
         <title>Exhibition AutoComplete</title>
       </Head>
       <div className={style.container}>
+        {collection.length === 0 || (
+          <button className={style.resetButton} name="reset">
+            X
+          </button>
+        )}
         <header className={style.selectedArtist}>
           Exhibition <span className={style.highlight}>Autocomplete</span>{" "}
           {Boolean(subject) && `: ${subject}`}
