@@ -31,16 +31,13 @@ describe("Home without form input", () => {
 });
 
 describe("Home with form input", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     fetchCollection.mockImplementation(() => {
       return Promise.resolve({
         name: "Helen Pablo",
         artists: ["card0", "card1", "card2", "card3", "card4"],
       });
     });
-  });
-
-  it("renders 5 Cards", async () => {
     render(<Home />);
     const field = screen.getByRole("textbox");
     fireEvent.change(field, { target: { value: "Pablo" } });
@@ -48,52 +45,29 @@ describe("Home with form input", () => {
     await waitFor(() => {
       screen.getAllByTestId("test-card");
     });
+  });
+
+  it("renders 5 Cards", async () => {
     const cards = await screen.findAllByTestId("test-card");
     expect(cards).toHaveLength(5);
   });
 
   it("renders the name that the user selected", async () => {
-    render(<Home />);
-    const field = screen.getByRole("textbox");
-    fireEvent.change(field, { target: { value: "Pablo" } });
-    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
-    await waitFor(() => {
-      screen.getAllByTestId("test-card");
-    });
     const heading = await screen.findByRole("banner");
     expect(heading).toHaveTextContent(/Pablo/g);
   });
 
   it("does not display the autocomplete", async () => {
-    render(<Home />);
-    const field = screen.getByRole("textbox");
-    fireEvent.change(field, { target: { value: "Pablo" } });
-    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
-    waitForElementToBeRemoved(() =>
-      screen.queryByTestId("autocomplete-artist")
-    );
+    const autocomplete = screen.queryByTestId("autocomplete-artist");
+    expect(autocomplete).not.toBeInTheDocument();
   });
 
   it("a reset button is displayed", async () => {
-    render(<Home />);
-    const field = screen.getByRole("textbox");
-    fireEvent.change(field, { target: { value: "Pablo" } });
-    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
-    await waitFor(() => {
-      screen.getAllByTestId("test-card");
-    });
     const reset = await screen.findByRole("button", { name: /x/i });
     expect(reset).toBeInTheDocument();
   });
 
   it("a reset button restores the page to default state", async () => {
-    render(<Home />);
-    const field = screen.getByRole("textbox");
-    fireEvent.change(field, { target: { value: "Pablo" } });
-    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
-    await waitFor(() => {
-      screen.getAllByTestId("test-card");
-    });
     const reset = await screen.findByRole("button", { name: /x/i });
     fireEvent.click(reset);
     const cards = screen.queryAllByTestId("test-card");
