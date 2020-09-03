@@ -17,7 +17,6 @@ const handlers = [
     return res(ctx.json(exhibitionResult));
   }),
   rest.get("http://localhost:3000/api/search", (req, res, ctx) => {
-    console.debug("hittin the fake stuff");
     return res(ctx.json(searchResult));
   }),
 ];
