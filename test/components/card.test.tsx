@@ -1,30 +1,31 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import Card from "../../components/card";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
+import { fetchImages } from "../../lib/fetch-images";
+import mockData from "../api/post-mock-data.json";
 
-const searchResult = {
-  title: "A beautiful title on a sunny day, 1900",
-  link: "http://example.com/link",
-};
-
-const server = setupServer(
-  rest.get("http://localhost:3000/api/search", (req, res, ctx) => {
-    return res(ctx.json(searchResult));
-  })
-);
+jest.mock("../../lib/fetch-images");
 
 describe("Card", () => {
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
-
-  it("renders a card", async () => {
-    render(<Card artist="foo name" />);
-    await waitFor(() => {
-      screen.findByTestId("test-card");
+  it("renders a card with a name and image", async () => {
+    fetchImages.mockImplementation(() => {
+      return Promise.resolve(mockData.items[0]);
     });
+    render(<Card artist="foo name" />);
+
     const card = await screen.findByTestId("test-card");
     expect(card).toHaveTextContent("foo name");
+    expect(card).toHaveAttribute(
+      "style",
+      `background-image: url(${mockData.items[0].link});`
+    );
+  });
+
+  it("displays an error", async () => {
+    fetchImages.mockImplementation(() => {
+      return Promise.reject("Error retrieving image.");
+    });
+    render(<Card artist="nope" />);
+    const card = await screen.findByTestId("test-card");
+    expect(card).toHaveTextContent("Error retrieving image.");
   });
 });
