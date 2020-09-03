@@ -1,30 +1,46 @@
-.resetButton {
+.resetButton,
+.helpButton {
   border-radius: 50%;
   height: 40px;
   width: 40px;
   font-weight: 600;
   font-size: 1.5rem;
   color: blue;
-  position: fixed;
-  top: 1.6rem;
-  right: 2rem;
   z-index: 999;
   box-shadow: 1px 1px 4px black;
 }
 
-.resetButton:hover {
+.resetButton:hover,
+.helpButton:hover {
   background-color: lightskyblue;
   color: white;
 }
 
-.selectedArtist {
-  font-size: 2rem;
-  text-decoration: line-through pink;
-  text-align: left;
+.resetButton {
+  position: fixed;
+  top: 1.6rem;
+  right: 2rem;
 }
 
-.highlight {
-  background-color: lightskyblue;
+.helpButton {
+  position: fixed;
+  top: 1.6rem;
+  right: 6rem;
+}
+
+.dialog {
+  margin-left: 4rem;
+  margin-right: 8rem;
+}
+
+.dialog h3 {
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+
+.dialog p {
+  background-color: white;
+  padding: 0 0.125rem;
 }
 
 .grid {

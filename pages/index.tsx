@@ -10,6 +10,7 @@ import { fetchCollection } from "../lib/fetch-collection";
 const Home: React.FC = () => {
   const [collection, setCollection] = useState<string[]>(Array());
   const [subject, setSubject] = useState<string>("");
+  const [isModalVisible, toggleModal] = useState<boolean>(false);
 
   const onSubmit = async (value: string | null) => {
     const data = await fetchCollection(value);
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
   const handleReset = () => {
     setCollection(Array());
     setSubject("");
+    toggleModal(false);
   };
 
   return (
@@ -29,16 +31,38 @@ const Home: React.FC = () => {
           {Boolean(subject) && `${subject} : `}Exhibition AutoComplete
         </title>
       </Head>
+      {isModalVisible && (
+        <div className={style.dialog} role="dialog">
+          <h3>Artists similar to {subject}</h3>
+          <p>
+            Autcomplete Exhibition is a project by{" "}
+            <a href="https://github.com/disposableraft/the-curator">
+              Lance Wakeling
+            </a>{" "}
+            that explores grouping artists based on statistical analysis.
+          </p>
+        </div>
+      )}
       <div className={style.container}>
         {collection.length === 0 || (
-          <button
-            onClick={handleReset}
-            className={style.resetButton}
-            name="reset"
-            title="Reset"
-          >
-            X
-          </button>
+          <div>
+            <button
+              onClick={handleReset}
+              className={style.resetButton}
+              name="reset"
+              title="Reset"
+            >
+              X
+            </button>
+            <button
+              onClick={() => toggleModal(!isModalVisible)}
+              className={style.helpButton}
+              name="help"
+              title="Help"
+            >
+              ?
+            </button>
+          </div>
         )}
         {collection.length > 0 || (
           <main>
