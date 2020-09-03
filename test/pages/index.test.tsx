@@ -85,4 +85,18 @@ describe("Home with form input", () => {
     const reset = await screen.findByRole("button", { name: /x/i });
     expect(reset).toBeInTheDocument();
   });
+
+  it("a reset button restores the page to default state", async () => {
+    render(<Home />);
+    const field = screen.getByRole("textbox");
+    fireEvent.change(field, { target: { value: "Pablo" } });
+    fireEvent.keyDown(field, { key: "Enter", code: "Enter" });
+    await waitFor(() => {
+      screen.getAllByTestId("test-card");
+    });
+    const reset = await screen.findByRole("button", { name: /x/i });
+    fireEvent.click(reset);
+    const cards = screen.queryAllByTestId("test-card");
+    expect(cards).toHaveLength(0);
+  });
 });

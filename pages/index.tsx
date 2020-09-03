@@ -17,6 +17,11 @@ const Home: React.FC = () => {
     setSubject(data.name);
   };
 
+  const handleReset = () => {
+    setCollection(Array());
+    setSubject("");
+  };
+
   return (
     <Layout>
       <Head>
@@ -24,7 +29,11 @@ const Home: React.FC = () => {
       </Head>
       <div className={style.container}>
         {collection.length === 0 || (
-          <button className={style.resetButton} name="reset">
+          <button
+            onClick={handleReset}
+            className={style.resetButton}
+            name="reset"
+          >
             X
           </button>
         )}
