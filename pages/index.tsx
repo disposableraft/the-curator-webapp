@@ -28,7 +28,7 @@ const Home: React.FC = () => {
           {Boolean(subject) && `: ${subject}`}
         </header>
         {collection.length > 0 || (
-          <main className={style.main}>
+          <main>
             <AutoComplete
               className={style.autocomplete}
               onSubmitCallback={(value) => onSubmit(value)}
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
         )}
 
         {collection.length === 0 || (
-          <main className={style.main}>
+          <main>
             <div data-testid="test-grid" className={style.grid}>
               {collection.map((artist) => {
                 return <Card key={artist.replace(/\s/g, "")} artist={artist} />;

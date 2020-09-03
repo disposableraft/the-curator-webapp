@@ -1,10 +1,7 @@
 .card {
-  flex-basis: 30%;
-  text-align: left;
   color: inherit;
   background-position: center;
   background-size: contain;
-  height: 200px;
 }
 
 .text {
@@ -16,8 +13,6 @@
 
 .card:hover .text {
   opacity: 1;
-  height: 100%;
-  width: 100%;
   color: white;
   text-shadow: 1px 1px 2px black;
 }
