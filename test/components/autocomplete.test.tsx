@@ -210,9 +210,7 @@ describe("AutoComplete", () => {
     expect(form).not.toHaveFormValues({ artistName: "Lee" });
   });
 
-  test.todo("typing new input resets the active selection");
+  test.todo("deleting the input resets the active selection");
 
-  test.todo("the input and suggestions are cleared onSubmit");
-
-  test.todo("the suggestions are not rendered when input loses focus");
+  test.todo("when input loses focus the suggestions are not rendered");
 });

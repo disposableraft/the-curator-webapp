@@ -22,6 +22,8 @@ describe("Home without form input", () => {
     const cards = screen.queryAllByTestId("test-card");
     expect(cards).toHaveLength(0);
   });
+
+  test.todo("a reset button is not displayed");
 });
 
 describe("Home with form input", () => {
@@ -67,4 +69,6 @@ describe("Home with form input", () => {
       screen.queryByTestId("autocomplete-artist")
     );
   });
+
+  test.todo("a reset button is displayed");
 });

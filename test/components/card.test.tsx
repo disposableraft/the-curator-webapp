@@ -28,4 +28,6 @@ describe("Card", () => {
     const card = await screen.findByTestId("test-card");
     expect(card).toHaveTextContent("Error retrieving image.");
   });
+
+  test.todo("onClick a new image is loaded");
 });
