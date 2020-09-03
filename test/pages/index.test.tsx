@@ -25,7 +25,7 @@ describe("Home without form input", () => {
 
   it("a reset button is not displayed", () => {
     render(<Home />);
-    const reset = screen.queryByRole("button", { name: /x/i });
+    const reset = screen.queryByRole("button", { name: /reset/i });
     expect(reset).not.toBeInTheDocument();
   });
 });
@@ -52,23 +52,18 @@ describe("Home with form input", () => {
     expect(cards).toHaveLength(5);
   });
 
-  it("renders the name that the user selected", async () => {
-    const heading = await screen.findByRole("banner");
-    expect(heading).toHaveTextContent(/Pablo/g);
-  });
-
   it("does not display the autocomplete", async () => {
     const autocomplete = screen.queryByTestId("autocomplete-artist");
     expect(autocomplete).not.toBeInTheDocument();
   });
 
   it("a reset button is displayed", async () => {
-    const reset = await screen.findByRole("button", { name: /x/i });
+    const reset = await screen.findByRole("button", { name: /reset/i });
     expect(reset).toBeInTheDocument();
   });
 
   it("a reset button restores the page to default state", async () => {
-    const reset = await screen.findByRole("button", { name: /x/i });
+    const reset = await screen.findByRole("button", { name: /reset/i });
     fireEvent.click(reset);
     const cards = screen.queryAllByTestId("test-card");
     expect(cards).toHaveLength(0);

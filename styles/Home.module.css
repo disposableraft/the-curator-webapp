@@ -1,3 +1,22 @@
+.resetButton {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: blue;
+  position: fixed;
+  top: 1.6rem;
+  right: 2rem;
+  z-index: 999;
+  box-shadow: 1px 1px 4px black;
+}
+
+.resetButton:hover {
+  background-color: lightskyblue;
+  color: white;
+}
+
 .selectedArtist {
   font-size: 2rem;
   text-decoration: line-through pink;

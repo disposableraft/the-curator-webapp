@@ -25,7 +25,9 @@ const Home: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>Exhibition AutoComplete</title>
+        <title>
+          {Boolean(subject) && `${subject} : `}Exhibition AutoComplete
+        </title>
       </Head>
       <div className={style.container}>
         {collection.length === 0 || (
@@ -33,14 +35,11 @@ const Home: React.FC = () => {
             onClick={handleReset}
             className={style.resetButton}
             name="reset"
+            title="Reset"
           >
             X
           </button>
         )}
-        <header className={style.selectedArtist}>
-          Exhibition <span className={style.highlight}>Autocomplete</span>{" "}
-          {Boolean(subject) && `: ${subject}`}
-        </header>
         {collection.length > 0 || (
           <main>
             <AutoComplete
