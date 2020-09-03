@@ -7,7 +7,10 @@ type Params = {
   [propName: string]: string;
 };
 
-const search = async (term: string, serverRuntimeConfig: Params) => {
+const search = async (
+  term: string,
+  serverRuntimeConfig: Params
+): Promise<any> => {
   const url = new URL(serverRuntimeConfig.googleSearchUrl);
   const params: Params = {
     q: term,
@@ -22,7 +25,7 @@ const search = async (term: string, serverRuntimeConfig: Params) => {
   return response.json();
 };
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   const { serverRuntimeConfig } = getConfig();
   const name = req.query.name as string;
 
