@@ -24,10 +24,9 @@ export const search = async (
   console.debug("CSE request for: ", term);
   const response = await fetch(url.href);
   if (!response.ok) {
-    throw new Error(`api/search ${response.statusText}`);
-  } else {
-    return response.json();
+    console.error(`api/search ${response.statusText}`);
   }
+  return response.json();
 };
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
@@ -40,7 +39,8 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       search(name, serverRuntimeConfig)
         .then((data) => {
           if (data.error) {
-            res.json(data.error);
+            console.error(data.error.message);
+            res.json(data);
           } else {
             setCachedResult(name, data);
             res.json(data.items[0]);
