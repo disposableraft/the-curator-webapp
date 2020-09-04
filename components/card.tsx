@@ -7,7 +7,6 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ artist, ...props }) => {
-  const [error, setError] = useState<string>();
   const [data, setData] = useState<SearchResult>();
   const id = artist.replace(/\s+/g, "");
 
@@ -21,7 +20,8 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
       })
       .catch((err) => {
         if (isMounted) {
-          setError(err);
+          console.error(err);
+          setData(err);
         }
       });
     return () => {
@@ -34,10 +34,12 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
       data-testid="test-card"
       className={style.card}
       style={{
-        backgroundImage: `url(${data?.link})`,
+        backgroundImage: `url(${
+          data?.link || "http://example.com/missing.jpg"
+        })`,
       }}
     >
-      <h1 className={style.text}>{error || artist}</h1>
+      <h1 className={style.text}>{data?.error?.message || artist}</h1>
     </div>
   );
 };

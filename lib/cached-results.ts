@@ -15,7 +15,6 @@ export const getCachedResult = (
   const handle = getHandle(searchTerm);
   fs.readFile(handle, "utf8", (err, json) => {
     callback(err, json);
-    console.log(`Using cache ${searchTerm}.`);
   });
 };
 

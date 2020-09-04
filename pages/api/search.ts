@@ -7,7 +7,7 @@ type Params = {
   [propName: string]: string;
 };
 
-const search = async (
+export const search = async (
   term: string,
   serverRuntimeConfig: Params
 ): Promise<any> => {
@@ -21,8 +21,13 @@ const search = async (
   Object.keys(params).forEach((key) =>
     url.searchParams.append(key, params[key])
   );
+  console.debug("CSE request for: ", term);
   const response = await fetch(url.href);
-  return response.json();
+  if (!response.ok) {
+    throw new Error(`api/search ${response.statusText}`);
+  } else {
+    return response.json();
+  }
 };
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
@@ -31,15 +36,22 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
 
   getCachedResult(name, (err, cache) => {
     if (err) {
+      console.debug(`No cache for ${name}`);
       search(name, serverRuntimeConfig)
         .then((data) => {
-          setCachedResult(name, data);
-          res.json(data.items[0]);
+          if (data.error) {
+            res.json(data.error);
+          } else {
+            setCachedResult(name, data);
+            res.json(data.items[0]);
+          }
         })
         .catch((err) => {
           console.debug(err);
+          res.json({ error: err });
         });
     } else {
+      console.debug(`Using cache for ${name}`);
       res.json(JSON.parse(cache).items[0]);
     }
   });

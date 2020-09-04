@@ -1,6 +1,7 @@
 import fetch from "isomorphic-unfetch";
 
 export interface SearchResult {
+  error?: any;
   title: string;
   link: string;
   image: {

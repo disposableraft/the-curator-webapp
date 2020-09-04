@@ -1,32 +1,22 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import Card from "../../components/card";
-import { fetchImages } from "../../lib/fetch-images";
-import mockData from "../api/post-mock-data.json";
-
-jest.mock("../../lib/fetch-images");
 
 describe("Card", () => {
   it("renders a card with a name and image", async () => {
-    fetchImages.mockImplementation(() => {
-      return Promise.resolve(mockData.items[0]);
-    });
-    render(<Card artist="foo name" />);
-
+    render(<Card artist="Helen Frankenthaler" />);
     const card = await screen.findByTestId("test-card");
-    expect(card).toHaveTextContent("foo name");
-    expect(card).toHaveAttribute(
-      "style",
-      `background-image: url(${mockData.items[0].link});`
-    );
+    expect(card).toHaveTextContent("Helen Frankenthaler");
   });
 
-  it("displays an error", async () => {
-    fetchImages.mockImplementation(() => {
-      return Promise.reject("Error retrieving image.");
-    });
-    render(<Card artist="nope" />);
+  it("handles a quota error", async () => {
+    render(<Card artist="quota_error" />);
     const card = await screen.findByTestId("test-card");
-    expect(card).toHaveTextContent("Error retrieving image.");
+    expect(card).toHaveAttribute(
+      "style",
+      `background-image: url(http://example.com/missing.jpg);`
+    );
+    const heading = await screen.findByRole("heading");
+    expect(heading).toHaveTextContent(/Quota exceeded/gi);
   });
 
   test.todo("onClick a new image is loaded");

@@ -1,14 +1,10 @@
 import { rest } from "msw";
-import post from "../pages/api/post";
+import quotaError from "./api/quota-error.json";
+import searchResult from "./api/post-mock-data.json";
 
 const exhibitionResult = {
   name: "Pablo",
   artists: ["a", "b", "c", "d", "e"],
-};
-
-const searchResult = {
-  link: "http://example.com/image.jpg?sha=1234",
-  title: "An alt title of staggering beauty",
 };
 
 const handlers = [
@@ -17,7 +13,12 @@ const handlers = [
     return res(ctx.json(exhibitionResult));
   }),
   rest.get("http://localhost:3000/api/search", (req, res, ctx) => {
-    return res(ctx.json(searchResult));
+    const name = req.url.searchParams.get("name");
+    if (name === "quota_error") {
+      return res(ctx.json(quotaError));
+    } else {
+      return res(ctx.json(searchResult.items[0]));
+    }
   }),
 ];
 
