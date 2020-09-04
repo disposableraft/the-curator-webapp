@@ -27,3 +27,7 @@ GOOGLE_SEARCH_URL="https://www.googleapis.com/customsearch/v1"
 GOOGLE_SEARCH_CX="xxxx"
 GOOGLE_SEARCH_KEY="xxxx"
 ```
+
+## Dataflow
+
+![](public/data-flow.png)
