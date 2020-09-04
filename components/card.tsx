@@ -39,7 +39,7 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
         })`,
       }}
     >
-      <h1 className={style.text}>{data?.error?.message || artist}</h1>
+      <h1 className={style.text}>{data?.error?.status || artist}</h1>
     </div>
   );
 };

@@ -16,7 +16,7 @@ describe("Card", () => {
       `background-image: url(http://example.com/missing.jpg);`
     );
     const heading = await screen.findByRole("heading");
-    expect(heading).toHaveTextContent(/Quota exceeded/gi);
+    expect(heading).toHaveTextContent(/resource_exhausted/gi);
   });
 
   test.todo("onClick a new image is loaded");
