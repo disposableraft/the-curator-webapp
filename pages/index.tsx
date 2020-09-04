@@ -13,9 +13,14 @@ const Home: React.FC = () => {
   const [isModalVisible, toggleModal] = useState<boolean>(false);
 
   const onSubmit = async (value: string | null) => {
-    const data = await fetchCollection(value);
-    setCollection(data.artists);
-    setSubject(data.name);
+    fetchCollection(value)
+      .then((data) => {
+        setCollection(data.artists);
+        setSubject(data.name);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const handleReset = () => {
