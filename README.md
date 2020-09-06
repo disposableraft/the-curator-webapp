@@ -6,6 +6,10 @@ Built with NextJs, React and Python 3.
 
 ![screenshot](public/curator-v0.1.gif)
 
+## Blog Post
+
+- [Exhibition Autocomplete: Displaying imagesets from The Curator](https://lancewakeling.net/blog/2020-09-05-exhibition-autocomplete/)
+
 ## Getting Started
 
 Run tests:
