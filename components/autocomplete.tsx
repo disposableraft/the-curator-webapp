@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "../styles/AutoComplete.module.css";
+import style from "../styles/autoComplete.module.css";
 
 interface AutoCompleteProps {
   allSuggestions: string[];
