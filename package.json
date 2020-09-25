@@ -14,7 +14,8 @@
   "dependencies": {
     "next": "9.5.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "identity-obj-proxy": "^3.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -27,7 +28,6 @@
     "@types/testing-library__jest-dom": "^5.9.2",
     "@types/testing-library__react": "^10.2.0",
     "babel-jest": "^26.3.0",
-    "identity-obj-proxy": "^3.0.0",
     "isomorphic-unfetch": "^3.0.0",
     "jest": "^26.4.2",
     "jest-fetch-mock": "^3.0.3",
