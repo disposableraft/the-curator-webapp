@@ -6,7 +6,7 @@ import Layout from "../../components/layout";
 import Card from "../../components/card";
 import style from "../../styles/Home.module.css";
 import names from "../../lib/names.json";
-import { fetchCollection } from "../../lib/fetch-collection";
+import { getCollection } from "../../lib/get-collection";
 
 type ExhibitionProps = {
   artists: string[];
@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     throw new Error("Slug is undefined or not a string");
   }
   const name = params?.slug.replace(/_/g, " ");
-  const exhibition = await fetchCollection(name);
+  const exhibition = getCollection(name);
   return { props: exhibition };
 };
 
