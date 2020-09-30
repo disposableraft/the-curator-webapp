@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
 import style from "../styles/Card.module.css";
-import { fetchImages, SearchResult } from "../lib/fetch-images";
+import { fetchImages, SearchResult, SearchItem } from "../lib/fetch-images";
 
 interface CardProps {
   artist: string;
 }
 
+interface SearchError {
+  status: string;
+  code: string;
+  message: string;
+}
+
 const Card: React.FC<CardProps> = ({ artist, ...props }) => {
-  const [data, setData] = useState<SearchResult>();
+  const [data, setData] = useState<SearchItem>();
+  const [error, setError] = useState<SearchError>();
   const id = artist.replace(/\s+/g, "");
 
   useEffect(() => {
@@ -15,13 +22,17 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
     fetchImages(artist)
       .then((data) => {
         if (isMounted) {
-          setData(data);
+          if (data?.error) {
+            setError(data.error);
+          } else {
+            setData(data.items[0]);
+          }
         }
       })
       .catch((err) => {
         if (isMounted) {
           console.error(err);
-          setData(err);
+          setError(err);
         }
       });
     return () => {
@@ -39,7 +50,7 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
         })`,
       }}
     >
-      <h1 className={style.text}>{data?.error?.status || artist}</h1>
+      <h1 className={style.text}>{error?.status || artist}</h1>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import fetch from "isomorphic-unfetch";
 
-export interface SearchResult {
-  error?: any;
+export interface SearchItem {
   title: string;
   link: string;
   image: {
@@ -9,6 +8,11 @@ export interface SearchResult {
     thumbnailHeight: number;
     thumbnailWidth: number;
   };
+}
+
+export interface SearchResult {
+  items: SearchItem[];
+  error?: any;
 }
 
 const fetchImages = async (term: string): Promise<SearchResult> => {

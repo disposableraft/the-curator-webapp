@@ -19,5 +19,8 @@ describe("Card", () => {
     expect(heading).toHaveTextContent(/resource_exhausted/gi);
   });
 
-  test.todo("onClick a new image is loaded");
+  it("onClick a new image is loaded", () => {
+    render(<Card artist="Helen Frankenthaler" />);
+    expect(false).toBe(true);
+  });
 });

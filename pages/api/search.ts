@@ -43,7 +43,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
             res.json(data);
           } else {
             setCachedResult(name, data);
-            res.json(data.items[0]);
+            res.json({ items: data.items });
           }
         })
         .catch((err) => {
@@ -52,7 +52,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         });
     } else {
       console.debug(`Using cache for ${name}`);
-      res.json(JSON.parse(cache).items[0]);
+      res.json({ items: JSON.parse(cache).items });
     }
   });
 };

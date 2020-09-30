@@ -12,7 +12,7 @@ const handlers = [
     if (name === "quota_error") {
       return res(ctx.json(quotaError));
     } else {
-      return res(ctx.json(searchResult.items[0]));
+      return res(ctx.json({ items: searchResult.items }));
     }
   }),
 ];
