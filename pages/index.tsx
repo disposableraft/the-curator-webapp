@@ -1,93 +1,31 @@
-import { useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Layout from "../components/layout";
 import AutoComplete from "../components/autocomplete";
-import Card from "../components/card";
 import style from "../styles/Home.module.css";
 import names from "../lib/names.json";
-import { fetchCollection } from "../lib/fetch-collection";
 
 const Home: React.FC = () => {
-  const [collection, setCollection] = useState<string[]>(Array());
-  const [subject, setSubject] = useState<string>("");
-  const [isModalVisible, toggleModal] = useState<boolean>(false);
+  const router = useRouter();
 
   const onSubmit = async (value: string | null) => {
-    fetchCollection(value)
-      .then((data) => {
-        setCollection(data.artists);
-        setSubject(data.name);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const handleReset = () => {
-    setCollection(Array());
-    setSubject("");
-    toggleModal(false);
+    // Route to ->  /exhibitions/artist_name
+    router.push(`/exhibitions/${value?.replace(/\s/g, "_")}`);
   };
 
   return (
     <Layout>
       <Head>
-        <title>
-          {Boolean(subject) && `${subject} : `}Exhibition AutoComplete
-        </title>
+        <title>Exhibition AutoComplete</title>
       </Head>
-      {isModalVisible && (
-        <div className={style.dialog} role="dialog">
-          <h3>Artists similar to {subject}</h3>
-          <p>
-            Autcomplete Exhibition is a project by{" "}
-            <a href="https://github.com/disposableraft/the-curator">
-              Lance Wakeling
-            </a>{" "}
-            that explores grouping artists based on statistical analysis.
-          </p>
-        </div>
-      )}
       <div className={style.container}>
-        {collection.length === 0 || (
-          <div>
-            <button
-              onClick={handleReset}
-              className={style.resetButton}
-              name="reset"
-              title="Reset"
-            >
-              ↺
-            </button>
-            <button
-              onClick={() => toggleModal(!isModalVisible)}
-              className={style.helpButton}
-              name="help"
-              title="Help"
-            >
-              ?
-            </button>
-          </div>
-        )}
-        {collection.length > 0 || (
-          <main className={style.autocompleteWrapper}>
-            <AutoComplete
-              placeholder="Artist name"
-              onSubmitCallback={(value) => onSubmit(value)}
-              allSuggestions={names}
-            />
-          </main>
-        )}
-
-        {collection.length === 0 || (
-          <main>
-            <div data-testid="test-grid" className={style.grid}>
-              {collection.map((artist) => {
-                return <Card key={artist.replace(/\s/g, "")} artist={artist} />;
-              })}
-            </div>
-          </main>
-        )}
+        <main className={style.autocompleteWrapper}>
+          <AutoComplete
+            placeholder="Artist name"
+            onSubmitCallback={(value) => onSubmit(value)}
+            allSuggestions={names}
+          />
+        </main>
       </div>
     </Layout>
   );
