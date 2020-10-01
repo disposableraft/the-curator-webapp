@@ -13,19 +13,20 @@ interface SearchError {
 }
 
 const Card: React.FC<CardProps> = ({ artist, ...props }) => {
-  const [data, setData] = useState<SearchItem>();
   const [error, setError] = useState<SearchError>();
+  const [data, setData] = useState<SearchResult>();
+  const [index, setIndex] = useState<number>(0);
   const id = artist.replace(/\s+/g, "");
 
   useEffect(() => {
     let isMounted = true;
     fetchImages(artist)
-      .then((data) => {
+      .then((data: SearchResult) => {
         if (isMounted) {
           if (data?.error) {
             setError(data.error);
           } else {
-            setData(data.items[0]);
+            setData(data);
           }
         }
       })
@@ -40,13 +41,19 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
     };
   }, []);
 
+  const handleClick = (): void => {
+    setIndex(index + 1);
+  };
+
   return (
     <div
+      onClick={handleClick}
       data-testid="test-card"
       className={style.card}
+      title="Click for new image"
       style={{
         backgroundImage: `url(${
-          data?.link || "http://example.com/missing.jpg"
+          data?.items[index].link || "http://example.com/missing.jpg"
         })`,
       }}
     >
