@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Layout from "../components/layout";
 import AutoComplete from "../components/autocomplete";
 import style from "../styles/Home.module.css";
-import names from "../lib/names.json";
+import names from "../data/names.json";
 
 const Home: React.FC = () => {
   const router = useRouter();

@@ -5,7 +5,7 @@ import Head from "next/head";
 import Layout from "../../components/layout";
 import Card from "../../components/card";
 import style from "../../styles/Home.module.css";
-import names from "../../lib/names.json";
+import names from "../../data/names.json";
 // TODO: rename file
 import { Exhibition, getExhibition } from "../../lib/get-exhibition";
 

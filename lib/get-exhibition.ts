@@ -2,7 +2,7 @@ import { getCachedResult } from "./cached-results";
 import { SearchResult } from "../types";
 
 // Get around TS `moduleResolution`
-const top12Map = require("./top_12_map.json");
+const top12Map = require("../data/top_12_map.json");
 
 export interface Exhibition {
   artists: {
