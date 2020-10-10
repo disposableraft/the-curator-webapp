@@ -1,48 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import style from "../styles/Card.module.css";
-import { fetchImages, SearchResult, SearchItem } from "../lib/fetch-images";
+import { SearchResult } from "../lib/fetch-images";
 
 interface CardProps {
-  artist: string;
+  name: string;
+  searchResult: SearchResult;
 }
 
-interface SearchError {
-  status: string;
-  code: string;
-  message: string;
-}
-
-const Card: React.FC<CardProps> = ({ artist, ...props }) => {
-  const [error, setError] = useState<SearchError>();
-  const [data, setData] = useState<SearchResult>();
+const Card: React.FC<CardProps> = ({ name, searchResult, ...props }) => {
   const [index, setIndex] = useState<number>(0);
-  const id = artist.replace(/\s+/g, "");
-
-  useEffect(() => {
-    let isMounted = true;
-    fetchImages(artist)
-      .then((data: SearchResult) => {
-        if (isMounted) {
-          if (data?.error) {
-            setError(data.error);
-          } else {
-            setData(data);
-          }
-        }
-      })
-      .catch((err) => {
-        if (isMounted) {
-          console.error(err);
-          setError(err);
-        }
-      });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   const handleClick = (): void => {
-    setIndex(index + 1);
+    const limit = searchResult.items.length - 1;
+    if (index === limit) {
+      setIndex(0);
+    } else {
+      setIndex(index + 1);
+    }
   };
 
   return (
@@ -53,11 +27,11 @@ const Card: React.FC<CardProps> = ({ artist, ...props }) => {
       title="Click for new image"
       style={{
         backgroundImage: `url(${
-          data?.items[index].link || "http://example.com/missing.jpg"
+          searchResult?.items[index].link || "http://example.com/missing.jpg"
         })`,
       }}
     >
-      <h1 className={style.text}>{error?.status || artist}</h1>
+      <h1 className={style.text}>{name}</h1>
     </div>
   );
 };

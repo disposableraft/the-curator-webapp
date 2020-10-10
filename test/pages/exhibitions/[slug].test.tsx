@@ -1,9 +1,13 @@
-import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
+import { Exhibition } from "../../../lib/get-collection";
 import Exhibitions from "../../../pages/exhibitions/[slug]";
+import mockResult from "../../api/post-mock-data.json";
 
-const exhibitionsProps = {
-  artists: ["card0", "card1", "card2", "card3", "card4"],
-  name: "Helen Testenthaler",
+const exhibitionsProps: Exhibition = {
+  artists: ["card0", "card1", "card2", "card3", "card4"].map((name) => {
+    return { name: name, searchResult: mockResult };
+  }),
+  subject: "Helen Testenthaler",
 };
 
 describe("Exhibitions component default settings", () => {

@@ -8,14 +8,9 @@ const getHandle = (searchTerm: string): string => {
   return path.join(cacheDir, filename);
 };
 
-export const getCachedResult = (
-  searchTerm: string,
-  callback: (err: NodeJS.ErrnoException | null, json: string) => void
-) => {
+export const getCachedResult = (searchTerm: string) => {
   const handle = getHandle(searchTerm);
-  fs.readFile(handle, "utf8", (err, json) => {
-    callback(err, json);
-  });
+  return fs.readFileSync(handle, "utf8");
 };
 
 export const setCachedResult = (searchTerm: string, data: string) => {

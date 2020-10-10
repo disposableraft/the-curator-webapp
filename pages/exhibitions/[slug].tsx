@@ -6,14 +6,25 @@ import Layout from "../../components/layout";
 import Card from "../../components/card";
 import style from "../../styles/Home.module.css";
 import names from "../../lib/names.json";
-import { getCollection } from "../../lib/get-collection";
+// TODO: rename file
+import { Exhibition, getExhibition } from "../../lib/get-collection";
 
-type ExhibitionProps = {
-  artists: string[];
-  name: string;
-};
+export interface SearchItem {
+  title: string;
+  link: string;
+  image: {
+    thumbnailLink: string;
+    thumbnailHeight: number;
+    thumbnailWidth: number;
+  };
+}
 
-const Exhibitions = ({ artists, name }: ExhibitionProps) => {
+export interface SearchResult {
+  items: SearchItem[];
+  error?: any;
+}
+
+const Exhibitions = (exhibition: Exhibition) => {
   const router = useRouter();
   const [isModalVisible, toggleModal] = useState<boolean>(false);
 
@@ -24,11 +35,14 @@ const Exhibitions = ({ artists, name }: ExhibitionProps) => {
   return (
     <Layout>
       <Head>
-        <title>{Boolean(name) && `${name} : `}Exhibition AutoComplete</title>
+        <title>
+          {Boolean(exhibition.subject) && `${exhibition.subject} : `}Exhibition
+          AutoComplete
+        </title>
       </Head>
       {isModalVisible && (
         <div className={style.dialog} role="dialog">
-          <h3>Artists similar to {name}</h3>
+          <h3>Artists similar to {exhibition.subject}</h3>
           <p>
             Exhibition Autcomplete groups artists based on word embeddings
             generated from a{" "}
@@ -40,36 +54,38 @@ const Exhibitions = ({ artists, name }: ExhibitionProps) => {
         </div>
       )}
       <div className={style.container}>
-        {artists.length === 0 || (
-          <div>
-            <button
-              onClick={handleReset}
-              className={style.resetButton}
-              name="reset"
-              title="Reset"
-            >
-              ↺
-            </button>
-            <button
-              onClick={() => toggleModal(!isModalVisible)}
-              className={style.helpButton}
-              name="help"
-              title="Help"
-            >
-              ?
-            </button>
-          </div>
-        )}
+        <div>
+          <button
+            onClick={handleReset}
+            className={style.resetButton}
+            name="reset"
+            title="Reset"
+          >
+            ↺
+          </button>
+          <button
+            onClick={() => toggleModal(!isModalVisible)}
+            className={style.helpButton}
+            name="help"
+            title="Help"
+          >
+            ?
+          </button>
+        </div>
 
-        {artists.length === 0 || (
-          <main>
-            <div data-testid="test-grid" className={style.grid}>
-              {artists.map((artist) => {
-                return <Card key={artist.replace(/\s/g, "")} artist={artist} />;
-              })}
-            </div>
-          </main>
-        )}
+        <main>
+          <div data-testid="test-grid" className={style.grid}>
+            {exhibition.artists.map((artist) => {
+              return (
+                <Card
+                  key={artist.name.replace(/\s/g, "")}
+                  name={artist.name}
+                  searchResult={artist.searchResult}
+                />
+              );
+            })}
+          </div>
+        </main>
       </div>
     </Layout>
   );
@@ -88,12 +104,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log(`params ${params?.slug}`);
   if (params?.slug === undefined || typeof params.slug !== "string") {
     throw new Error("Slug is undefined or not a string");
   }
   const name = params?.slug.replace(/_/g, " ");
-  const exhibition = getCollection(name);
+  const exhibition = getExhibition(name);
+
   return { props: exhibition };
 };
 
