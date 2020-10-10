@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import { Exhibition } from "../../../lib/get-collection";
+import { Exhibition } from "../../../lib/get-exhibition";
 import Exhibitions from "../../../pages/exhibitions/[slug]";
 import mockResult from "../../api/post-mock-data.json";
 

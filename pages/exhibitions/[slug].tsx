@@ -7,7 +7,7 @@ import Card from "../../components/card";
 import style from "../../styles/Home.module.css";
 import names from "../../lib/names.json";
 // TODO: rename file
-import { Exhibition, getExhibition } from "../../lib/get-collection";
+import { Exhibition, getExhibition } from "../../lib/get-exhibition";
 
 export interface SearchItem {
   title: string;
