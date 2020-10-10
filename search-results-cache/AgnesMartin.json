@@ -1,0 +1,246 @@
+{
+  "kind": "customsearch#search",
+  "url": {
+    "type": "application/json",
+    "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+  },
+  "queries": {
+    "request": [
+      {
+        "title": "Google Custom Search - Agnes Martin",
+        "totalResults": "21300",
+        "searchTerms": "Agnes Martin",
+        "count": 10,
+        "startIndex": 1,
+        "inputEncoding": "utf8",
+        "outputEncoding": "utf8",
+        "safe": "off",
+        "cx": "9d938007cabd9838a",
+        "searchType": "image"
+      }
+    ],
+    "nextPage": [
+      {
+        "title": "Google Custom Search - Agnes Martin",
+        "totalResults": "21300",
+        "searchTerms": "Agnes Martin",
+        "count": 10,
+        "startIndex": 11,
+        "inputEncoding": "utf8",
+        "outputEncoding": "utf8",
+        "safe": "off",
+        "cx": "9d938007cabd9838a",
+        "searchType": "image"
+      }
+    ]
+  },
+  "context": { "title": "Moma.org" },
+  "searchInformation": {
+    "searchTime": 0.27932,
+    "formattedSearchTime": "0.28",
+    "totalResults": "21300",
+    "formattedTotalResults": "21,300"
+  },
+  "items": [
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. The Tree. 1964 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. The Tree. 1964 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjI0ODYzOCJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=76c47bf1c3db0488",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. The Tree. 1964 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. The Tree. 1964 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/78361",
+        "height": 1995,
+        "width": 2000,
+        "byteSize": 528050,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd8OP7MNN_aa5httfzx-4eEyOsl6kGy8bUbOy2FKxyrbKru-LmIBUS6C9m&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 150
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. Untitled. 1960 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. Untitled. 1960 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjk3MTgyIl0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDkwIC1yZXNpemUgMjAwMHgyMDAwXHUwMDNlIl1d.jpg?sha=805bfbec4f79a3ca",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. Untitled. 1960 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. Untitled. 1960 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/34006",
+        "height": 1963,
+        "width": 2000,
+        "byteSize": 673754,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbNwzotAVyeyN8xKwxwm6QgimJw_qOcWj_5CU3yxbXZPNSabUSVpYHx1zm&s",
+        "thumbnailHeight": 147,
+        "thumbnailWidth": 150
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. Tremolo. 1962 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. Tremolo. 1962 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjE3MjA0OCJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=f05544dcb106bb4f",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. Tremolo. 1962 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. Tremolo. 1962 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/38280",
+        "height": 2000,
+        "width": 1585,
+        "byteSize": 764175,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCI2D1YArF2tuAbn7ll4F8lNgqlb8ecLtutMKl2vls5jysYMCs6KunEQ&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 119
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. Stone. 1964 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. Stone. 1964 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjE4NTU2NyJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=679660e6a8ddabf9",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. Stone. 1964 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. Stone. 1964 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/37559",
+        "height": 2000,
+        "width": 1994,
+        "byteSize": 696324,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTgpmK25GBZs1HuFuiQ1ScY0uGvdd1Z_QkgnKqOo5YV6JD2AjQ3AbIjVsT&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 150
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. Untitled #6. 1989 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. Untitled #6. 1989 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjE1MTI5MiJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MTQ0MFx1MDAzZSJdXQ.jpg?sha=c883bdf96e832daf",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. Untitled #6. 1989 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. Untitled #6. 1989 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/79540",
+        "height": 1440,
+        "width": 1442,
+        "byteSize": 82850,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkjdZJ2IY5c0XFcvJDLCXXO8A1z1bggmMUxDzAHkTPJhLzDB76YVmMTic&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 150
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. With My Back to the World. 1997 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. With My Back to the World. 1997 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjE2MDAzOSJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=f335fc34910d77a0",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. With My Back to the World. 1997 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. With My Back to the World. 1997 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/79892",
+        "height": 2000,
+        "width": 1912,
+        "byteSize": 359810,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_nv2LnN5iTx9pjODdQ4R4sUAf99EBcw6-ttbNJ9E8ClMNTSLvaRQyavw0&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 143
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. On a Clear Day. 1973 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. On a Clear Day. 1973 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjI2MzE1OSJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=fe2580c382e607d5",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. On a Clear Day. 1973 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. On a Clear Day. 1973 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/63682",
+        "height": 2000,
+        "width": 1973,
+        "byteSize": 730754,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs6ebbn6f-HwCfXjFfsUeBf5DG58KWHLIk-bx-ySb01u4ZKyDVSAyoqtM&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 148
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. Red Bird. 1964 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. Red Bird. 1964 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjE3NTk3MiJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=3fac3b15a44e5a23",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. Red Bird. 1964 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. Red Bird. 1964 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/34916",
+        "height": 2000,
+        "width": 1970,
+        "byteSize": 319215,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHwTqukPAoC4w7YvThVGo7Dp1p59GWveK0vsKUiWhBofUiYq9W2ke-zvW9&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 148
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. Untitled. 1978 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. Untitled. 1978 | MoMA",
+      "link": "https://www.moma.org/media/W1siZiIsIjExMjU0NyJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=8143ddc0addc8cf1",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. Untitled. 1978 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. Untitled. 1978 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/96613",
+        "height": 1995,
+        "width": 2000,
+        "byteSize": 438009,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzAOahVSkwK__HD_k44WDvXRYLs1Q9eoYbujWqb7lXmcruillEJATyK_Kd&s",
+        "thumbnailHeight": 150,
+        "thumbnailWidth": 150
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Agnes Martin. Friendship. 1963 | MoMA",
+      "htmlTitle": "<b>Agnes Martin</b>. Friendship. 1963 | MoMA",
+      "link": "https://i.ytimg.com/vi/DTko0rfdmys/maxresdefault.jpg",
+      "displayLink": "www.moma.org",
+      "snippet": "Agnes Martin. Friendship. 1963 | MoMA",
+      "htmlSnippet": "<b>Agnes Martin</b>. Friendship. 1963 | MoMA",
+      "mime": "image/jpeg",
+      "fileFormat": "image/jpeg",
+      "image": {
+        "contextLink": "https://www.moma.org/collection/works/79842",
+        "height": 720,
+        "width": 1280,
+        "byteSize": 73859,
+        "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4ie3DIHKPdPrQyT7Vd0nxhlMZx7NibB4eAKUyTVZwbe-zTWj_EAb6FmI&s",
+        "thumbnailHeight": 84,
+        "thumbnailWidth": 150
+      }
+    }
+  ]
+}
