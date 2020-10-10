@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Card from "../../components/card";
-import searchData from "../api/post-mock-data.json";
+import searchData from "../data/search-result.json";
 
 describe("Card", () => {
   it("renders a card with a name and image", async () => {

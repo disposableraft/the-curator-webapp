@@ -1,7 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import { Exhibition } from "../../../lib/get-exhibition";
 import Exhibitions from "../../../pages/exhibitions/[slug]";
-import mockResult from "../../api/post-mock-data.json";
+import mockResult from "../../data/search-result.json";
 
 const exhibitionsProps: Exhibition = {
   artists: ["card0", "card1", "card2", "card3", "card4"].map((name) => {
