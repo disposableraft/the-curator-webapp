@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "../styles/Card.module.css";
-import { SearchResult } from "../lib/fetch-images";
+import { SearchResult } from "../types";
 
 interface CardProps {
   name: string;

@@ -1,5 +1,5 @@
 import { getCachedResult } from "./cached-results";
-import { SearchResult } from "./fetch-images";
+import { SearchResult } from "../types";
 
 // Get around TS `moduleResolution`
 const top12Map = require("./top_12_map.json");
